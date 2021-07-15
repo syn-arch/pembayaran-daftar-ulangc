@@ -123,32 +123,30 @@
 										<th>Waktu Transfer</th>
 										<td><input required type="datetime-local" name="waktu_transfer" id="waktu_transfer" class="form-control <?php if(form_error('waktu_transfer')) echo 'is-invalid'?>"></td>
 									</tr>
-									<?php if ($pembayaran['nama_kategori'] == 'Daftar Ulang'): ?>
-										<tr>
-											<th>Scan Raport Semester Akhir lembar 1 )*</th>
-											<td>
-												<input type="file" name="raport1" class="form-control" required>
-											</td>
-										</tr>	
-										<tr>
-											<th>Scan Raport Semester Akhir lembar 2 )*</th>
-											<td>
-												<input type="file" name="raport2" class="form-control" required>
-											</td>
-										</tr>	
-										<tr>
-											<th>Scan ijazah / fotokopi yang sudah dilegalisir lembar 1 )*</th>
-											<td>
-												<input type="file" name="ijazah1" class="form-control" required>
-											</td>
-										</tr>	
-										<tr>
-											<th>Scan ijazah / fotokopi yang sudah dilegalisir lembar 2</th>
-											<td>
-												<input type="file" name="ijazah2" class="form-control">
-											</td>
-										</tr>	
-									<?php endif ?>
+									<tr>
+										<th>Scan Raport Semester Akhir lembar 1 )*</th>
+										<td>
+											<input type="file" name="raport1" class="form-control" required>
+										</td>
+									</tr>	
+									<tr>
+										<th>Scan Raport Semester Akhir lembar 2 )*</th>
+										<td>
+											<input type="file" name="raport2" class="form-control" required>
+										</td>
+									</tr>	
+									<tr>
+										<th>Scan ijazah / fotokopi yang sudah dilegalisir lembar 1 )*</th>
+										<td>
+											<input type="file" name="ijazah1" class="form-control" required>
+										</td>
+									</tr>	
+									<tr>
+										<th>Scan ijazah / fotokopi yang sudah dilegalisir lembar 2</th>
+										<td>
+											<input type="file" name="ijazah2" class="form-control">
+										</td>
+									</tr>	
 									<tr>
 										<td colspan=2>
 											<button type="submit" class="btn btn-primary btn-block">Submit</button>
