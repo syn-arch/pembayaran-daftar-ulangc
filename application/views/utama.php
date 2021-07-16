@@ -3,8 +3,7 @@
 <?php 
 
 $data = [
-	'nis' => $this->session->userdata('nis'),
-	'id_kategori' => '3'
+	'nis' => $this->session->userdata('nis')
 ];
 
 $bayar = $this->db->get_where('transaksi', $data)->row_array();
@@ -65,27 +64,29 @@ $pengumuman_sekolah = $this->db->get('pengaturan')->row_array()['pengumuman'];
 	</div>
 <?php endif ?>
 
-<?php if ($bayar['status'] == 0): ?>
-	<div class="card card-primary card-outline">
-		<div class="card-body">
-			<div class="row">
-				<div class="col-md-12">
-					<table class="table">
-						<thead>
-							<tr>
-								<td><h2 class="text-center">Perhatian</h2></td>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>
-									<p class="text-center"><?= $bayar['keterangan'] ?></p>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>	
+<?php if ($bayar): ?>
+	<?php if ($bayar['status'] == 0): ?>
+		<div class="card card-primary card-outline">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-md-12">
+						<table class="table">
+							<thead>
+								<tr>
+									<td><h2 class="text-center">Perhatian</h2></td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<p class="text-center"><?= $bayar['keterangan'] ?></p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>	
+			</div>
 		</div>
-	</div>
+	<?php endif ?>
 	<?php endif ?>

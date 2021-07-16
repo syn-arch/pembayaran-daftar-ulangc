@@ -64,9 +64,8 @@
 </div>
 
 <script>
-    ClassicEditor
-        .create( document.querySelector( '#pengumuman' ) )
-        .catch( error => {
-            console.error( error );
-        } );
+	$(document).ready(function() {
+		$('#pesan').summernote();
+		$('#pengumuman').summernote();
+	});
 </script>

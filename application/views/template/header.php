@@ -23,6 +23,9 @@
   <link rel="stylesheet" href="<?php echo base_url('vendor/smartwizard/dist/css/') ?>smart_wizard_theme_circles.min.css">
   <link rel="stylesheet" href="<?php echo base_url('vendor/smartwizard/dist/css/') ?>smart_wizard_theme_dots.min.css">
   <script src="<?php echo base_url('assets/js/ckeditor.js') ?>"></script>
+  <script src="<?php echo base_url('vendor/lte/') ?>plugins/jquery/jquery.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
@@ -57,157 +60,157 @@
             <div class="image">
               <img src="<?php echo base_url('assets/img/petugas/') .  $this->session->userdata('gambar'); ?>" class="img-circle elevation-2" alt="User Image">
             </div>
-          <div class="info">
-            <a href="<?php echo base_url('profil') ?>" class="d-block"><?php echo $this->session->userdata('nama_petugas'); ?></a>
-          </div>
+            <div class="info">
+              <a href="<?php echo base_url('profil') ?>" class="d-block"><?php echo $this->session->userdata('nama_petugas'); ?></a>
+            </div>
           <?php else : ?>
             <div class="info">
               <a href="#" class="d-block"><?php echo $this->session->userdata('nama_siswa'); ?></a>
             </div>
           <?php endif; ?>
         </div>
-          <!-- Sidebar Menu -->
-          <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-             <?php
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+           <?php
 
-             $id_user = $this->session->userdata('id_user');
-             $id_role = $this->session->userdata('id_role');
+           $id_user = $this->session->userdata('id_user');
+           $id_role = $this->session->userdata('id_role');
 
-             $sql = "SELECT * FROM role_access_menu JOIN menu USING(id_menu) WHERE role_access_menu.id_role = '$id_role' ORDER BY menu.urutan ";
-             $menu = $this->db->query($sql)->result_array();
-             $counter = 1;
-             ?>
-             <?php foreach ($menu as $row): ?>
+           $sql = "SELECT * FROM role_access_menu JOIN menu USING(id_menu) WHERE role_access_menu.id_role = '$id_role' ORDER BY menu.urutan ";
+           $menu = $this->db->query($sql)->result_array();
+           $counter = 1;
+           ?>
+           <?php foreach ($menu as $row): ?>
 
-              <?php if ($row['ada_submenu'] == 0): ?>
+            <?php if ($row['ada_submenu'] == 0): ?>
+              <li class="nav-item">
+                <a href="<?php echo base_url($row['url']) ?>" class="nav-link <?= $judul == $row['nama_menu'] ? 'active' : '' ?>">
+                  <i class="nav-icon fas <?php echo $row['icon'] ?>"></i>
+                  <p>
+                    <?php echo $row['nama_menu'] ?>
+                  </p>
+                </a>
+              </li>
+
+              <?php if ($counter == 1): ?>
                 <li class="nav-item">
-                  <a href="<?php echo base_url($row['url']) ?>" class="nav-link <?= $judul == $row['nama_menu'] ? 'active' : '' ?>">
-                    <i class="nav-icon fas <?php echo $row['icon'] ?>"></i>
+                  <a href="<?php echo base_url() ?>" target="_blank" class="nav-link">
+                    <i class="nav-icon fas fa-globe"></i>
                     <p>
-                      <?php echo $row['nama_menu'] ?>
+                      Lihat Website
                     </p>
                   </a>
                 </li>
+              <?php endif ?>
 
-                <?php if ($counter == 1): ?>
-                  <li class="nav-item">
-                    <a href="<?php echo base_url() ?>" target="_blank" class="nav-link">
-                      <i class="nav-icon fas fa-globe"></i>
-                      <p>
-                        Lihat Website
-                      </p>
-                    </a>
-                  </li>
-                <?php endif ?>
+            <?php else: ?>
 
-                <?php else: ?>
+              <?php
 
-                  <?php
+              $cek = $this->db->get_where('menu',['nama_menu' => $judul])->row_array();
 
-                  $cek = $this->db->get_where('menu',['nama_menu' => $judul])->row_array();
+              if ($cek) {
+                $ada_submenu = $this->db->get_where('menu',['nama_menu' => $judul])->row_array()['ada_submenu'];
+              }else{
+                $ada_submenu = $this->db->get_where('submenu',['nama_submenu' => $judul])->row_array();
+              }
 
-                  if ($cek) {
-                    $ada_submenu = $this->db->get_where('menu',['nama_menu' => $judul])->row_array()['ada_submenu'];
-                  }else{
-                    $ada_submenu = $this->db->get_where('submenu',['nama_submenu' => $judul])->row_array();
-                  }
+              if ($ada_submenu) {
+                $this->db->join('submenu', 'id_menu');
+                $nama_menu = $this->db->get_where('menu',['nama_submenu' => $judul])->row_array()['nama_menu']; 
+              }
 
-                  if ($ada_submenu) {
-                    $this->db->join('submenu', 'id_menu');
-                    $nama_menu = $this->db->get_where('menu',['nama_submenu' => $judul])->row_array()['nama_menu']; 
-                  }
+              ?>
 
-                  ?>
+              <li class="nav-item has-treeview 
+              <?php 
+              if($ada_submenu){
+                if($nama_menu == $row['nama_menu']){
+                  echo 'menu-open';
+                }
+              } 
+            ?>">
 
-                  <li class="nav-item has-treeview 
-                  <?php 
-                  if($ada_submenu){
-                    if($nama_menu == $row['nama_menu']){
-                      echo 'menu-open';
-                    }
-                  } 
-                  ?>">
+            <a href="#" class="nav-link
+            <?php 
+            if($ada_submenu){
+              if($nama_menu == $row['nama_menu']){
+                echo 'active';
+              }
+            } 
+          ?>">
+          <i class="nav-icon fa <?php echo $row['icon'] ?>"></i>
+          <p>
+            <?php echo $row['nama_menu'] ?>
+            <i class="right fas fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
 
-                  <a href="#" class="nav-link
-                  <?php 
-                  if($ada_submenu){
-                    if($nama_menu == $row['nama_menu']){
-                      echo 'active';
-                    }
-                  } 
-                  ?>">
-                  <i class="nav-icon fa <?php echo $row['icon'] ?>"></i>
-                  <p>
-                    <?php echo $row['nama_menu'] ?>
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
+         <?php 
+         $id_menu = $row['id_menu'];
+         $sql = "SELECT nama_submenu,submenu.url as url FROM role_access_submenu JOIN submenu USING(id_submenu) JOIN menu USING(id_menu) WHERE menu.id_menu = '$id_menu' AND role_access_submenu.id_role = $id_role ORDER BY submenu.urutan ";
+         $submenu = $this->db->query($sql)->result_array();
+         ?>
 
-                 <?php 
-                 $id_menu = $row['id_menu'];
-                 $sql = "SELECT nama_submenu,submenu.url as url FROM role_access_submenu JOIN submenu USING(id_submenu) JOIN menu USING(id_menu) WHERE menu.id_menu = '$id_menu' AND role_access_submenu.id_role = $id_role ORDER BY submenu.urutan ";
-                 $submenu = $this->db->query($sql)->result_array();
-                 ?>
-
-                 <?php foreach ($submenu as $row_submenu): ?>
-                  <li class="nav-item">
-                    <a href="<?php echo base_url($row_submenu['url']) ?>" class="nav-link <?= $judul == $row_submenu['nama_submenu'] ? 'active' : '' ?>">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p><?php echo $row_submenu['nama_submenu'] ?></p>
-                    </a>
-                  </li>
-                <?php endforeach ?>
-              </ul>
-            </li>
-
-          <?php endif; ?>
-          <?php $counter++ ?>
-        <?php endforeach ?>
-
-        <?php if ($this->session->userdata('id_role') == 9): ?>
+         <?php foreach ($submenu as $row_submenu): ?>
           <li class="nav-item">
-            <a href="<?php echo base_url('auth/logout_siswa') ?>" class="nav-link">
-              <i class="nav-icon fas fa-sign-out-alt"></i>
-              <p>
-                Logout
-              </p>
+            <a href="<?php echo base_url($row_submenu['url']) ?>" class="nav-link <?= $judul == $row_submenu['nama_submenu'] ? 'active' : '' ?>">
+              <i class="far fa-circle nav-icon"></i>
+              <p><?php echo $row_submenu['nama_submenu'] ?></p>
             </a>
           </li>
-          <?php else: ?>
-            <li class="nav-item">
-              <a href="<?php echo base_url('auth/logout') ?>" class="nav-link">
-                <i class="nav-icon fas fa-sign-out-alt"></i>
-                <p>
-                  Logout
-                </p>
-              </a>
-            </li>
-          <?php endif ?>
+        <?php endforeach ?>
+      </ul>
+    </li>
 
-        </ul>
-      </nav>
-      <!-- /.sidebar-menu -->
-    </div>
-    <!-- /.sidebar -->
-  </aside>
+  <?php endif; ?>
+  <?php $counter++ ?>
+<?php endforeach ?>
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0 text-dark"><?php echo $judul ?></h1>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
+<?php if ($this->session->userdata('id_role') == 9): ?>
+  <li class="nav-item">
+    <a href="<?php echo base_url('auth/logout_siswa') ?>" class="nav-link">
+      <i class="nav-icon fas fa-sign-out-alt"></i>
+      <p>
+        Logout
+      </p>
+    </a>
+  </li>
+<?php else: ?>
+  <li class="nav-item">
+    <a href="<?php echo base_url('auth/logout') ?>" class="nav-link">
+      <i class="nav-icon fas fa-sign-out-alt"></i>
+      <p>
+        Logout
+      </p>
+    </a>
+  </li>
+<?php endif ?>
 
-    <!-- Main content -->
-    <div class="content">
-      <div class="container-fluid">
+</ul>
+</nav>
+<!-- /.sidebar-menu -->
+</div>
+<!-- /.sidebar -->
+</aside>
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark"><?php echo $judul ?></h1>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+
+  <!-- Main content -->
+  <div class="content">
+    <div class="container-fluid">
 

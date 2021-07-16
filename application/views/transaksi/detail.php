@@ -121,7 +121,7 @@
 									</tr>
 									<tr>
 										<th>Waktu Transfer</th>
-										<td><input required type="datetime-local" name="waktu_transfer" id="waktu_transfer" class="form-control <?php if(form_error('waktu_transfer')) echo 'is-invalid'?>"></td>
+										<td><input required type="time" name="waktu_transfer" id="waktu_transfer" class="form-control <?php if(form_error('waktu_transfer')) echo 'is-invalid'?>"></td>
 									</tr>
 									<tr>
 										<th>Scan Raport Semester Akhir lembar 1 )*</th>

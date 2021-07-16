@@ -106,27 +106,25 @@ class Transaksi_m extends CI_Model {
 			'bukti_pembayaran' => $bukti_pembayaran
 		];
 
-		if ($siswa['tahun_ajaran'] != date('Y') && $kategori['nama_kategori'] == 'Daftar Ulang') {
 
-			$ijazah1 = $this->_upload_bukti('ijazah1');
-			$ijazah2 = $this->_upload_bukti('ijazah2');
-			$raport1 = $this->_upload_bukti('raport1');
-			$raport2 = $this->_upload_bukti('raport2');
+		$ijazah1 = $this->_upload_bukti('ijazah1');
+		$ijazah2 = $this->_upload_bukti('ijazah2');
+		$raport1 = $this->_upload_bukti('raport1');
+		$raport2 = $this->_upload_bukti('raport2');
 
-			$data['raport1'] = $raport1;
-			$data['ijazah1'] = $ijazah1;
-			$data['ijazah2'] = $ijazah2;
-			$data['raport2'] = $raport2;
+		$data['raport1'] = $raport1;
+		$data['ijazah1'] = $ijazah1;
+		$data['ijazah2'] = $ijazah2;
+		$data['raport2'] = $raport2;
 
-			$this->resizeImage($bukti_pembayaran);
-			$this->resizeImage($ijazah1);
-			$this->resizeImage($ijazah2);
-			$this->resizeImage($shun1);
-			$this->resizeImage($shun2);
-			$this->resizeImage($raport1);
-			$this->resizeImage($raport2);
+		$this->resizeImage($bukti_pembayaran);
+		$this->resizeImage($ijazah1);
+		$this->resizeImage($ijazah2);
+		$this->resizeImage($shun1);
+		$this->resizeImage($shun2);
+		$this->resizeImage($raport1);
+		$this->resizeImage($raport2);
 
-		}
 
 		if ($this->session->userdata('id_role') == 9) {
 			$data['nama_bank'] = $post['nama_bank'];

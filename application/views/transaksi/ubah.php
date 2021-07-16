@@ -71,7 +71,7 @@
 										</div>
 										<div class="form-group <?php if(form_error('waktu_transfer')) echo 'has-error'?>">
 											<label for="waktu_transfer">Waktu Transfer</label>
-											<input type="datetime-local" id="waktu_transfer" name="waktu_transfer" class="form-control waktu_transfer " placeholder="Waktu Transfer" value="<?php echo date('Y-m-d\TH:i:s', strtotime($transaksi['waktu_transfer'])) ?>">
+											<input type="time" id="waktu_transfer" name="waktu_transfer" class="form-control waktu_transfer " placeholder="Waktu Transfer" value="<?php echo $transaksi['waktu_transfer'] ?>">
 											<?php echo form_error('waktu_transfer', '<small style="color:red">','</small>') ?>
 										</div>
 									<?php endif ?>
@@ -113,52 +113,50 @@
 										</a>
 									</div>
 
-									<?php if ($siswa['tahun_ajaran'] != date('Y') && $transaksi['nama_kategori'] == 'Daftar Ulang'): ?>
-										<div class="form-group">
-											<label for="ijazah1">Ijazah lembar 1</label>
-											<input type="file" id="ijazah1" name="ijazah1" class="form-control ijazah1 <?php if(form_error('ijazah1')) echo 'is-invalid'?>" value="<?php echo set_value('ijazah1') ?>">
-											<?php echo form_error('ijazah1', '<small style="color:red">','</small>') ?>
-										</div>
-										<div class="form-group">
-											<label for="">IJAZAH lembar 1</label>
-											<a href="<?php echo base_url('assets/img/gambar/') . $transaksi['ijazah1'] ?>" download>
-												<img src="<?php echo base_url('assets/img/gambar/') . $transaksi['ijazah1'] ?>" alt="" class="img-fluid mt-4">
-											</a>
-										</div>
-										<div class="form-group">
-											<label for="ijazah2">Ijazah lembar 2</label>
-											<input type="file" id="ijazah2" name="ijazah2" class="form-control ijazah2 <?php if(form_error('ijazah2')) echo 'is-invalid'?>" value="<?php echo set_value('ijazah2') ?>">
-											<?php echo form_error('ijazah2', '<small style="color:red">','</small>') ?>
-										</div>
-										<div class="form-group">
-											<label for="">IJAZAH lembar 2</label>
-											<a href="<?php echo base_url('assets/img/gambar/') . $transaksi['ijazah2'] ?>" download>
-												<img src="<?php echo base_url('assets/img/gambar/') . $transaksi['ijazah2'] ?>" alt="" class="img-fluid mt-4">
-											</a>
-										</div>
-										<div class="form-group">
-											<label for="raport1">Raport lembar 1</label>
-											<input type="file" id="raport1" name="raport1" class="form-control raport1 <?php if(form_error('raport1')) echo 'is-invalid'?>" value="<?php echo set_value('raport1') ?>">
-											<?php echo form_error('raport1', '<small style="color:red">','</small>') ?>
-										</div>
-										<div class="form-group">
-											<label for="">RAPORT SEMESTER AKHIR lembar 1</label>
-											<a href="<?php echo base_url('assets/img/gambar/') . $transaksi['raport1'] ?>" download>
-												<img src="<?php echo base_url('assets/img/gambar/') . $transaksi['raport1'] ?>" alt="" class="img-fluid mt-4">
-											</a>
-										</div>
-										<div class="form-group">
-											<label for="raport2">Raport lembar 2</label>
-											<input type="file" id="raport2" name="raport2" class="form-control raport2 <?php if(form_error('raport2')) echo 'is-invalid'?>" value="<?php echo set_value('raport2') ?>">
-											<?php echo form_error('raport2', '<small style="color:red">','</small>') ?>
-										</div>
-										<div class="form-group">
-											<label for="">RAPORT SEMESTER AKHIR lembar 2</label>
-											<a href="<?php echo base_url('assets/img/gambar/') . $transaksi['raport2'] ?>" download>
-												<img src="<?php echo base_url('assets/img/gambar/') . $transaksi['raport2'] ?>" alt="" class="img-fluid mt-4">
-											</a>
-										</div>
-									<?php endif ?>
+									<div class="form-group">
+										<label for="ijazah1">Ijazah lembar 1</label>
+										<input type="file" id="ijazah1" name="ijazah1" class="form-control ijazah1 <?php if(form_error('ijazah1')) echo 'is-invalid'?>" value="<?php echo set_value('ijazah1') ?>">
+										<?php echo form_error('ijazah1', '<small style="color:red">','</small>') ?>
+									</div>
+									<div class="form-group">
+										<label for="">IJAZAH lembar 1</label>
+										<a href="<?php echo base_url('assets/img/gambar/') . $transaksi['ijazah1'] ?>" download>
+											<img src="<?php echo base_url('assets/img/gambar/') . $transaksi['ijazah1'] ?>" alt="" class="img-fluid mt-4">
+										</a>
+									</div>
+									<div class="form-group">
+										<label for="ijazah2">Ijazah lembar 2</label>
+										<input type="file" id="ijazah2" name="ijazah2" class="form-control ijazah2 <?php if(form_error('ijazah2')) echo 'is-invalid'?>" value="<?php echo set_value('ijazah2') ?>">
+										<?php echo form_error('ijazah2', '<small style="color:red">','</small>') ?>
+									</div>
+									<div class="form-group">
+										<label for="">IJAZAH lembar 2</label>
+										<a href="<?php echo base_url('assets/img/gambar/') . $transaksi['ijazah2'] ?>" download>
+											<img src="<?php echo base_url('assets/img/gambar/') . $transaksi['ijazah2'] ?>" alt="" class="img-fluid mt-4">
+										</a>
+									</div>
+									<div class="form-group">
+										<label for="raport1">Raport lembar 1</label>
+										<input type="file" id="raport1" name="raport1" class="form-control raport1 <?php if(form_error('raport1')) echo 'is-invalid'?>" value="<?php echo set_value('raport1') ?>">
+										<?php echo form_error('raport1', '<small style="color:red">','</small>') ?>
+									</div>
+									<div class="form-group">
+										<label for="">RAPORT SEMESTER AKHIR lembar 1</label>
+										<a href="<?php echo base_url('assets/img/gambar/') . $transaksi['raport1'] ?>" download>
+											<img src="<?php echo base_url('assets/img/gambar/') . $transaksi['raport1'] ?>" alt="" class="img-fluid mt-4">
+										</a>
+									</div>
+									<div class="form-group">
+										<label for="raport2">Raport lembar 2</label>
+										<input type="file" id="raport2" name="raport2" class="form-control raport2 <?php if(form_error('raport2')) echo 'is-invalid'?>" value="<?php echo set_value('raport2') ?>">
+										<?php echo form_error('raport2', '<small style="color:red">','</small>') ?>
+									</div>
+									<div class="form-group">
+										<label for="">RAPORT SEMESTER AKHIR lembar 2</label>
+										<a href="<?php echo base_url('assets/img/gambar/') . $transaksi['raport2'] ?>" download>
+											<img src="<?php echo base_url('assets/img/gambar/') . $transaksi['raport2'] ?>" alt="" class="img-fluid mt-4">
+										</a>
+									</div>
 
 
 

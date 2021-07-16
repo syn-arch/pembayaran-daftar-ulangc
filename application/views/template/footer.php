@@ -17,8 +17,7 @@
 
 <!-- REQUIRED SCRIPTS -->
 
-<!-- jQuery -->
-<script src="<?php echo base_url('vendor/lte/') ?>plugins/jquery/jquery.min.js"></script>
+
 <!-- Bootstrap 4 -->
 <script src="<?php echo base_url('vendor/lte/') ?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
