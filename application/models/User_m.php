@@ -25,9 +25,9 @@ class User_m extends CI_Model {
 	public function delete($id_user='')
 	{	
 					$this->db->join('petugas', 'id_user');
-		$gb_lama = $this->db->get_where('user',['id_user' => $id])->row_array()['gambar'];
+		$gb_lama = $this->db->get_where('user',['id_user' => $id_user])->row_array()['gambar'];
 		unlink(FCPATH . 'assets/img/petugas/' . $gb_lama);
-		$this->db->delete('user', ['id_user' => $id]);
+		$this->db->delete('user', ['id_user' => $id_user]);
 	}
 
 	private function _upload_petugas()

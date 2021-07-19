@@ -9,6 +9,8 @@ $route['admin'] = 'auth';
 
 $route['login'] = 'auth/login';
 
+$route['user/hapus_user/(:any)'] = 'user/hapus/$1';
+
 // master
 $route['master/jurusan'] = 'jurusan';
 $route['master/tambah_jurusan'] = 'jurusan/tambah';
