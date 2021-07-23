@@ -430,6 +430,7 @@
           {"data": "id_siswa"},
           {"data": "tgl_transaksi"},
           {"data": "nama_siswa"},
+          {"data": "nama_jurusan"},
           {"data": "nama_kategori"},
           {"data": "jumlah_bayar"},
           {

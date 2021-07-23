@@ -60,7 +60,7 @@ class Transaksi_m extends CI_Model {
 		$petugas = $this->db->get_where('user', ['id_user' => $this->session->userdata('id_user')])->row_array();
 
 
-		$this->datatables->select('transaksi.tgl_transaksi,transaksi.tgl, nama_siswa, nama_kategori, jumlah_bayar, status, id_transaksi, id_siswa, siswa.id_jurusan');
+		$this->datatables->select('transaksi.tgl_transaksi,transaksi.tgl, nama_siswa, nama_kategori, jumlah_bayar, status, id_transaksi, id_siswa, siswa.id_jurusan, nama_jurusan');
 		$this->datatables->from('transaksi');
 		$this->datatables->join('kategori', 'transaksi.id_kategori=kategori.id_kategori');
 		$this->datatables->join('siswa', 'transaksi.nis=siswa.nis');

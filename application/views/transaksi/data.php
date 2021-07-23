@@ -27,6 +27,7 @@
 								<th>No</th>
 								<th>Tgl Transfer</th>
 								<th>Nama</th>
+								<th>Jurusan</th>
 								<th>Kategori</th>
 								<th>Jumlah Bayar</th>
 								<th>Status</th>

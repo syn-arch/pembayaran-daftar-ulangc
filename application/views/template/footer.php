@@ -36,6 +36,6 @@
 <!-- smartwizard -->
 <script src="<?php echo base_url('vendor/smartwizard/dist/js/') ?>jquery.smartWizard.min.js"></script>
 <!-- custom js -->
-<script src="<?php echo base_url('assets/js/') ?>script1.js"></script>
+<script src="<?php echo base_url('assets/js/') ?>script1.js?v=1"></script>
 </body>
 </html>
