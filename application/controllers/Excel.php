@@ -245,7 +245,7 @@ class Excel extends CI_Controller {
 	
 	public function export_laporan() // ekspor siswa
 	{
-			$result = "SELECT transaksi.tgl,nama_bank,atas_nama,no_rekening,tgl_transaksi,status,nis,nama_siswa,nama_jurusan,nama_kelas,jumlah_bayar FROM siswa LEFT JOIN transaksi USING(nis)
+			$result = "SELECT transaksi.tgl,nama_bank,atas_nama,no_rekening,tgl_transaksi,status,nis,nama_siswa,nama_jurusan,nama_kelas,jumlah_bayar,waktu_transfer FROM siswa LEFT JOIN transaksi USING(nis)
 			LEFT JOIN jurusan ON jurusan.id_jurusan=siswa.id_jurusan
 			LEFT JOIN kelas ON kelas.id_kelas=siswa.id_kelas
 			";
@@ -268,6 +268,7 @@ class Excel extends CI_Controller {
 		->setCellValue('I1', 'No Rekening')
 		->setCellValue('J1', 'Atas Nama')
 		->setCellValue('K1', 'Tgl Transaksi')
+		->setCellValue('L1', 'Waktu Transfer')
 		;
 		// Miscellaneous glyphs, UTF-8
 		$i=2; 
@@ -296,6 +297,7 @@ class Excel extends CI_Controller {
 			->setCellValue('I' . $i, $row['no_rekening'])
 			->setCellValue('J' . $i, $row['atas_nama'])
 			->setCellValue('K' . $i, $row['tgl'])
+			->setCellValue('L' . $i, $row['waktu_transfer'])
 			;
 			$i++;
 		}                           
